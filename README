@@ -1,0 +1,19 @@
+python --version
+dsquery user -name nandls01
+pip install ldap3
+dsquery
+clear
+cls
+dsquery * "DC=nyumc,DC=org" -scope base -attr distinguishedName
+history
+doskey /history
+
+
+=====
+No paramters will can sometimes run it with default on same pc
+
+ python .\match_groups.py nandls01 rygiem01
+ python .\diff_groups.py  nandls01 rygiem01
+ python .\group_check.py  nandls01
+ python .\list_admin.py PRKMCITPC2222 --username nyumc\nandls01  <== doesn't workt
+ python .\list_admin.py <--- runs locally
