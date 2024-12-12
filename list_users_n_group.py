@@ -40,6 +40,9 @@ def get_group_members(server, user_dn, base_dn, group_name, password):
             username = user_info.sAMAccountName.value
             display_name = user_info.displayName.value
             members.append((username, display_name))
+    
+    # Sort members by display name
+    members.sort(key=lambda x: x[1])
     return members
 
 # Main function to handle command-line arguments
