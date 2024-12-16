@@ -33,8 +33,20 @@ def main():
 
     groups = get_user_groups(args.username, password)
     print(f"Groups for {args.username}:")
+    
+    # Extract and process group names
+    group_names = []
     for group in groups:
-        print(group)
+        group_name = group.split(',')[0].split('=')[1]
+        group_name = group_name.replace("\\#", "#")
+        group_names.append(group_name)
+    
+    # Sort the group names
+    group_names.sort()
+    
+    # Print sorted group names
+    for group_name in group_names:
+        print(group_name)
 
 if __name__ == "__main__":
     main()
