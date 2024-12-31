@@ -1,0 +1,34 @@
+### list_installed_apps.py
+* No parameters
+* prints all installed apps on local windows 11 pc
+
+### diff_groups.py
+* 2 parameters => Two AD account-name
+* Requires config.ini
+* prints AD group memberships unique to each User Account
+
+### group_check.py
+* 1 parameters => AD account-name
+* Requires config.ini
+* prints all group memberships for account-name
+
+### list_admin.py
+* No parameters
+* prints users & groups inside local admin group
+
+### list_users_n_group.py
+* 1 parameters => AD group-name
+* Requires config.ini
+* prints all users + groups inside AD group
+
+
+### match_groups.py
+* 2 parameters => both AD account names
+* Requires config.ini
+* prints AD group memberships common to both User Account
+
+### computer_OU.py
+* 1 parameters => computer name
+* Requires config.ini
+* prints OU with computer
+
