@@ -1,7 +1,7 @@
-import argparse             #command-line arguments
-import getpass              # securely handle input
-import configparser         # handle config files
-from ldap3 import Server, Connection, ALL   #AAA
+import argparse
+import getpass
+import configparser
+from ldap3 import Server, Connection, ALL
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -22,7 +22,7 @@ print(f"User DN: {user_dn}")
 print(f"Base DN: {base_dn}")
 
 # Define the server
-server = Server(server_name, get_info=ALL)  #AAA
+server = Server(server_name, get_info=ALL)
 
 # Function to get users in a group
 def get_group_members(server, user_dn, base_dn, group_name, password):
@@ -38,10 +38,10 @@ def get_group_members(server, user_dn, base_dn, group_name, password):
         if conn.entries:
             user_info = conn.entries[0]
             username = user_info.sAMAccountName.value
-            display_name = user_info.displayName.value if user_info.displayName else "Unknown"
+            display_name = user_info.displayName.value
             members.append((username, display_name))
     
-    # Sort members by display name, handling None values
+    # Sort members by display name
     members.sort(key=lambda x: (x[1] is None, x[1]))
     return members
 

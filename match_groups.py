@@ -8,9 +8,18 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 # Extract values from the configuration file
-server_name = config['DEFAULT']['server']
-user_dn = config['DEFAULT']['user_dn']
-base_dn = config['DEFAULT']['base_dn']
+try:
+    server_name = config['DEFAULT']['server']
+    user_dn = config['DEFAULT']['user_dn']
+    base_dn = config['DEFAULT']['base_dn']
+except KeyError as e:
+    print(f"Missing configuration key: {e}")
+    exit(1)
+
+# Print configuration values for debugging
+print(f"Server: {server_name}")
+print(f"User DN: {user_dn}")
+print(f"Base DN: {base_dn}")
 
 # Define the server and connection
 server = Server(server_name, get_info=ALL)
