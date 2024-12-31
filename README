@@ -1,6 +1,7 @@
 ### list_installed_apps.py
 * No parameters
 * prints all installed apps on local windows 11 pc
+* create .txt file with output and email attachment
 
 ### diff_groups.py
 * 2 parameters => Two AD account-name
