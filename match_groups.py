@@ -46,6 +46,7 @@ def main():
     args = parser.parse_args()
 
     # Prompt for password without echoing
+    #
     password = getpass.getpass(prompt='Enter password: ')
 
     common_groups = find_common_groups(args.user1, args.user2, password)
