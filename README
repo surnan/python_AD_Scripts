@@ -1,3 +1,8 @@
+
+##
+## Searches require EXACT match.  No partial searches
+##
+
 ### list_installed_apps.py
 * No parameters
 * prints all installed apps on local windows 11 pc

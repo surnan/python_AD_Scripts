@@ -1,7 +1,7 @@
-import argparse             #command-line arguments
-import getpass              # securely handle input
-import configparser         # handle config files
-from ldap3 import Server, Connection, ALL   #AAA
+import argparse  # Command-line arguments
+import getpass  # Securely handle input
+import configparser  # Handle config files
+from ldap3 import Server, Connection, ALL  # LDAP
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -22,7 +22,7 @@ print(f"User DN: {user_dn}")
 print(f"Base DN: {base_dn}")
 
 # Define the server
-server = Server(server_name, get_info=ALL)  #AAA
+server = Server(server_name, get_info=ALL)
 
 # Function to get users in a group
 def get_group_members(server, user_dn, base_dn, group_name, password):
@@ -31,8 +31,18 @@ def get_group_members(server, user_dn, base_dn, group_name, password):
     print("Connection established.")
     search_filter = f'(cn={group_name})'
     conn.search(base_dn, search_filter, attributes=['member'])
+    
+    if not conn.entries:
+        print(f"No group found with name: {group_name}.")
+        return []
+
     members = []
-    for entry in conn.entries[0].member:
+    group_entry = conn.entries[0]
+    if 'member' not in group_entry:
+        print(f"No members found in group: {group_name}.")
+        return members
+
+    for entry in group_entry.member:
         user_dn = entry
         conn.search(user_dn, '(objectClass=person)', attributes=['sAMAccountName', 'displayName'])
         if conn.entries:
@@ -40,7 +50,7 @@ def get_group_members(server, user_dn, base_dn, group_name, password):
             username = user_info.sAMAccountName.value
             display_name = user_info.displayName.value if user_info.displayName else "Unknown"
             members.append((username, display_name))
-    
+
     # Sort members by display name, handling None values
     members.sort(key=lambda x: (x[1] is None, x[1]))
     return members
@@ -55,9 +65,12 @@ def main():
     password = getpass.getpass(prompt='Enter password: ')
 
     members = get_group_members(server, user_dn, base_dn, args.group, password)
-    print(f"Members of group {args.group}:")
-    for username, display_name in members:
-        print(f"Username: {username}, Display Name: {display_name}")
+    if members:
+        print(f"Members of group {args.group}:")
+        for username, display_name in members:
+            print(f"Username: {username}, Display Name: {display_name}")
+    else:
+        print(f"No members found in group {args.group}.")
 
 if __name__ == "__main__":
     main()
