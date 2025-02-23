@@ -2,3 +2,4 @@ config.ini
 examples
 *.txt
 *.csv
+*.js
