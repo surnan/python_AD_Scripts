@@ -55,8 +55,5 @@ def main():
         print(group)
 
 
-
-
-
 if __name__ == "__main__":
     main()
