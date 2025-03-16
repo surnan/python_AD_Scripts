@@ -54,6 +54,5 @@ def main():
     for group in common_groups:
         print(group)
 
-
 if __name__ == "__main__":
     main()
