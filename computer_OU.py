@@ -24,6 +24,7 @@ print(f"Base DN: {base_dn}")
 # Define the server and connection
 server = Server(server_name, get_info=ALL)
 
+
 # Function to get the OU of a computer account
 def get_computer_ou(computer_name, password):
     conn = Connection(server, user_dn, password, auto_bind=True)
