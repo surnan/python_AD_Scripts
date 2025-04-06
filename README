@@ -27,7 +27,6 @@
 * Requires config.ini
 * prints all users + groups inside AD group
 
-
 ### match_groups.py
 * 2 parameters => both AD account names
 * Requires config.ini
